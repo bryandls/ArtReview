@@ -55,7 +55,7 @@ class Login extends Component{
                 <h1>Welcome to The Arttt Review</h1>
                 <br />
                 <div className="App-header"></div><br />
-                <a href="/artist">Artist Page</a>
+                
                 <h3>Please log in to begin critiquing/Submitting art!</h3>
             <form>
                 <label>Username:

@@ -89,6 +89,53 @@ router.post("/api", function(req, res){
 })
 });
 
+// router.post("/artSubmit", function(req,res){
+//     console.log("we in this one now!!", userID)
+//     user.findOneAndUpdate({id: userID},
+//     {practiceField:"put this ine there!!!"}).then(function(){
+//         console.log('success')
+//     }).catch((err)=>console.log(err))
+// })
+
+router.post("/artSubmit", function(req, res){
+    console.log("hello", req.body);
+    user.update({
+        "_id": userID},
+        {"$push":
+    {
+        "Post":{
+            "postName": req.body.postName,
+            "postDescription": req.body.postDescription,
+            "link": req.body.link
+        }}
+    }).then(()=>{
+    res.json(true);
+}).catch((err) => {
+    res.json(err)
+});
+});
+
+
+router.get("/getPics", function (req,res){
+    user.findOne({"_id": userID}).then((docs) => {
+        
+        console.log("string", docs)
+        console.log(docs.Post[0].postName)
+        res.json(docs)
+
+        var pics = {
+            name:docs.Post[0].postName,
+            description:docs.Post[0].postDescription,
+            link:docs.Post[0].link
+        }
+        console.log(pics)
+
+       
+    
+   });
+});
+
+
 router.get("/id", function(req,res){
     user.findOne({_id: userID}).then(function(data){
         res.send(data);
